@@ -1,1 +1,1 @@
-hex_to_text = hex to text converter to use in a buffer overflow context
+hex_to_text = a converter to be used in a buffer overflow context

@@ -39,12 +39,12 @@ def to_x_endian(hex_arg):
 def text_to_hex(text_arg):
     hex_text = text_arg.encode('utf-8').hex()
     text_diff = len(hex_text) % 4
-    if text_diff == 0: # padding
+    # padding
+    if text_diff == 0:
         hex_text += "00" * 4
         return hex_text
     else:
-        padding = (4 - (text_diff)) * 2
-        hex_text += "00" * padding
+        hex_text += "0" * text_diff
         return hex_text
  
 def hex_to_text(hex_arg):

@@ -5,7 +5,7 @@ import sys
 usage = """Usage: python hex_converter.py <command> <argument>
           
 Commands:
-    textd:  convert hexadecimal to text
+    texth:  convert hexadecimal to text
     hext:   convert text to hexadecimal + padding
     endian: convert between big and little endian
     dech:   convert hexadecimal to decimal
@@ -63,7 +63,7 @@ def hex_to_dec(hex_arg):
 
 if command == "hext":        # text to hex
     print(text_to_hex(argm))
-elif command == "textd":     # hex to text
+elif command == "texth":     # hex to text
     print(hex_to_text(argm))
 elif command == "endian":    # endian conversion
     print(to_x_endian(argm))

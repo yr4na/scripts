@@ -19,7 +19,6 @@ void received_name(const char *name)
 void handle_client(SOCKET client_sock)
 {
     char buffer[500];
-    char name[500];
 
     const char *msg = "Enter your name: ";
     send(client_sock, msg, strlen(msg), 0);
@@ -90,6 +89,16 @@ int main()
         freeaddrinfo(result);
         WSACleanup();
         return 1;
+    }
+
+    if (result->ai_family == AF_INET6)
+    {
+        int ipv6only = 0;
+        if (setsockopt(ListenSocket, IPPROTO_IPV6, IPV6_V6ONLY,
+                       (char *)&ipv6only, sizeof(ipv6only)) == SOCKET_ERROR)
+        {
+            printf("Failed to set IPV6_V6ONLY: %d\n", WSAGetLastError());
+        }
     }
 
     iResult = bind(ListenSocket, result->ai_addr, (int)result->ai_addrlen);

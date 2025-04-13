@@ -6,10 +6,13 @@
 #include <ws2tcpip.h>
 #include <stdio.h>
 #include <string.h>
+#include <windows.h>
 
 #pragma comment(lib, "ws2_32.lib")
 
 #define DEFAULT_PORT "9999"
+
+HINSTANCE hDll = NULL;
 
 void received_name(const char *name)
 {
@@ -53,6 +56,13 @@ void handle_client(SOCKET client_sock)
 
 int main()
 {
+    hDll = LoadLibrary("serverdll.dll");
+	if (!hDll) {
+	    printf("Error loading DLL: %d\n", GetLastError());
+	    return 1;
+	}
+	printf("[*] DLL loaded successfully\n");
+
     WSADATA wsaData;
     SOCKET ListenSocket = INVALID_SOCKET;
     SOCKET ClientSocket = INVALID_SOCKET;

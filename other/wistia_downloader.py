@@ -78,4 +78,4 @@ if whisper:
         subprocess.run(
             f"whisper .\\{audio_name} --model base --output_format srt", shell=True, check=True)
     except:
-        print("Unexpected FFmpeg Processing Error.")
+        print("Unexpected Whisper Processing Error.")

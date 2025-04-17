@@ -3,7 +3,7 @@
 #
 # Requirements:
 # - For download only: requests package
-# - For subtitle generation: ffmpeg and whisper
+# - For subtitle generation: whisper
 #
 # How to get the video ID: https://gist.github.com/szepeviktor/2a8a3ce8b32e2a67ca416ffd077553c5
 
@@ -68,14 +68,7 @@ except Exception as e:
 
 if whisper:
     try:
-        audio_name = video_name.replace(".mp4", ".wav")
         subprocess.run(
-            f"ffmpeg -i .\\{video_name} -vn -ar 16000 -ac 1 -c:a pcm_s16le .\\{audio_name}", shell=True, check=True)
-    except:
-        print("FFmpeg Conversion Error.")
-
-    try:
-        subprocess.run(
-            f"whisper .\\{audio_name} --model base --output_format srt", shell=True, check=True)
+            f"whisper .\\{video_name} --model base --output_format srt", shell=True, check=True)
     except:
         print("Unexpected Whisper Processing Error.")
